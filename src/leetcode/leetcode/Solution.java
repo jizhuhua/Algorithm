@@ -1,5 +1,7 @@
 package leetcode;
 
+import javafx.scene.transform.Rotate;
+
 import java.util.*;
 
 public class Solution {
@@ -375,6 +377,135 @@ public class Solution {
 
     //78 子集
     public List<List<Integer>> subsets(int[] nums) {
-        
+        List<List<Integer>> ans = new ArrayList<>();
+        backtrack(ans, new ArrayList<Integer>(), 0, nums);
+        return ans;
+    }
+
+    private void backtrack(List<List<Integer>> ans, ArrayList<Integer> tmp, int i, int[] nums) {
+        ans.add(new ArrayList<>(tmp));//{1} {1 2} {1 2 3} //需remove
+        for (int j = i; j < nums.length; j++) {
+            tmp.add(nums[j]);
+            backtrack(ans, tmp, j + 1, nums);
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+
+    //46 全排列
+    List<List<Integer>> res = new LinkedList<>();
+
+    /* 主函数，输入一组不重复的数字，返回它们的全排列 */
+    public List<List<Integer>> permute(int[] nums) {
+        // 记录「路径」
+        LinkedList<Integer> track = new LinkedList<>();
+        backtrack(nums, track);
+        return res;
+    }
+
+    // 路径：记录在 track 中
+    // 选择列表：nums 中不存在于 track 的那些元素
+    // 结束条件：nums 中的元素全都在 track 中出现
+    void backtrack(int[] nums, LinkedList<Integer> track) {
+        // 触发结束条件
+        if (track.size() == nums.length) {
+            res.add(new LinkedList(track));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            // 排除不合法的选择
+            if (track.contains(nums[i]))
+                continue;
+            // 做选择
+            track.add(nums[i]);
+            // 进入下一层决策树
+            backtrack(nums, track);
+            // 取消选择([1,2，]取消2，回到for循环的下一个数生成[1,3,])
+            track.removeLast();
+        }
+    }
+
+
+//单例模式
+//class Single {
+//    public static final Single instance = new Single();
+//
+//    private Single() {
+//
+//    }
+//}
+//
+//enum Single2 {
+//    SINGLE;
+//}
+
+
+    //338.比特位计数
+    public int[] countBits(int num) {
+        int[] res = new int[num + 1];
+        for (int i = 0; i <= num; i++) {
+            res[i] = Integer.bitCount(i);
+        }
+        return res;
+    }
+
+    //二叉树中序遍历
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        inorder(res, root);
+        return res;
+    }
+
+    private void inorder(List<Integer> res, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inorder(res, root.left);
+        res.add(root.val);
+        inorder(res, root.right);
+    }
+
+
+    //除自身以外数组的乘积
+    public int[] productExceptSelf(int[] nums) {
+        int len = nums.length;
+        int[] ans = new int[len];
+        int tmpL = 1;
+        int tmpR = 1;
+        for (int i = 0; i < len; i++) {
+            tmpL = tmpR = 1;
+            for (int j = 0; j < i; j++) {
+                tmpL *= nums[j];
+            }
+            for (int j = len - 1; j > i; j--) {
+                tmpR *= nums[j];
+            }
+            ans[i] = tmpL * tmpR;
+        }
+        return ans;
+    }
+
+    public void flatten(TreeNode root) {
+        //根节点开始迭代
+        while (root != null) {
+            //左节点没有，根节点直接到下一个根
+            if (root.left == null) {
+                root = root.right;
+            } else {
+                //右节点放到左节点的最右
+                TreeNode tmp = root.left;
+                while (tmp.right != null) {
+                    tmp = tmp.right;
+                }
+                tmp.right = root.right;
+                //左节点放到根的右节点
+                root.right = root.left;
+                //根的左节点置null
+                root.left = null;
+                //根节点下移
+                root = root.right;
+            }
+
+        }
     }
 }
