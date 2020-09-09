@@ -508,4 +508,35 @@ public class Solution {
 
         }
     }
+
+    public void rotate(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return;
+        }
+        int n = matrix.length - 1;
+        int[][] res = new int[n + 1][n + 1];
+        for (int j = 0; j <= n; j++) {
+            for (int i = 0; i <= n; i++) {
+                int matrix1 = matrix[i][j];
+                res[j][n - i] = matrix1;
+            }
+        }
+        for (int i = 0; i <= n; i++) {
+            System.arraycopy(res[i], 0, matrix[i], 0, n + 1);
+        }
+    }
+
+
+    public int numTrees(int n) {
+        int[] res = new int[n + 1];
+        res[0] = 1;
+        res[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 0; j <= i - 1; j++) {
+                res[i] = res[j] * res[i - 1 - j];
+            }
+        }
+        return res[n];
+    }
+
 }

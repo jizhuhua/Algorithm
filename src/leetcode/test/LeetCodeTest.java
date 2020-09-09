@@ -49,7 +49,12 @@ public class LeetCodeTest {
 
     @Test
     public void test06() {
-        System.out.println(1 ^ 4);
+        System.out.println(solution.permute(new int[]{1, 2}));
+    }
+
+    @Test
+    public void test07() {
+        System.out.println(solution.subsets(new int[]{1, 2}));
     }
 
 }
