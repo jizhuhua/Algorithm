@@ -539,6 +539,7 @@ public class Solution {
         return res[n];
     }
 
+    //218 前缀树
     class TrieNode {
 
         // R links to node children
@@ -583,15 +584,15 @@ public class Solution {
 
         // Inserts a word into the trie.
         public void insert(String word) {
-            TrieNode node = root;
+            TrieNode curNode = root;
             for (int i = 0; i < word.length(); i++) {
                 char currentChar = word.charAt(i);
-                if (!node.containsKey(currentChar)) {
-                    node.put(currentChar, new TrieNode());
+                if (!curNode.containsKey(currentChar)) {
+                    curNode.put(currentChar, new TrieNode());
                 }
-                node = node.get(currentChar);
+                curNode = curNode.get(currentChar);
             }
-            node.setEnd();
+            curNode.setEnd();
         }
 
 
@@ -614,6 +615,11 @@ public class Solution {
         public boolean search(String word) {
             TrieNode node = searchPrefix(word);
             return node != null && node.isEnd();
+        }
+
+        public boolean startsWith(String word) {
+            TrieNode node = searchPrefix(word);
+            return node != null;
         }
 
     }
