@@ -4,6 +4,8 @@ import leetcode.Solution;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.sound.midi.Soundbank;
+
 public class LeetCodeTest {
     Solution solution;
 
@@ -55,6 +57,13 @@ public class LeetCodeTest {
     @Test
     public void test07() {
         System.out.println(solution.subsets(new int[]{1, 2}));
+    }
+
+    @Test
+    public void test08() {
+        Solution.Trie trie = solution.new Trie();
+        trie.insert("abca");
+        System.out.println(trie.search("abc"));
     }
 
 }
