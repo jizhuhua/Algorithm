@@ -664,5 +664,32 @@ public class Solution {
         return ans;
     }
 
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+        if (strs[0].equals("") || strs[0].length() == 0) {
+            return "";
+        }
+        String prefix = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            prefix = shrink(prefix, strs[i]);
+            if (prefix.equals("")) {
+                return "";
+            }
+        }
+        return prefix;
+    }
+
+    private String shrink(String prefix, String str) {
+        int i = 0;
+        int end = str.length() - 1;
+        for (; i <= end && i <= prefix.length() - 1; i++) {
+            if (prefix.charAt(i) != str.charAt(i)) {
+                break;
+            }
+        }
+        return prefix.substring(0, i);
+    }
 
 }

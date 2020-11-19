@@ -51,8 +51,7 @@ public class LeetCodeTest {
 
     @Test
     public void test06() {
-        solution.romanToInt("VI");
-        System.out.println(solution.permute(new int[]{1, 2}));
+        System.out.println(solution.longestCommonPrefix(new String[]{"dog","racecar","car"}));
     }
 
     @Test
