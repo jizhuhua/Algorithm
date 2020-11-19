@@ -51,6 +51,7 @@ public class LeetCodeTest {
 
     @Test
     public void test06() {
+        solution.romanToInt("VI");
         System.out.println(solution.permute(new int[]{1, 2}));
     }
 
