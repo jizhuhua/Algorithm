@@ -426,20 +426,6 @@ public class Solution {
     }
 
 
-//单例模式
-//class Single {
-//    public static final Single instance = new Single();
-//
-//    private Single() {
-//
-//    }
-//}
-//
-//enum Single2 {
-//    SINGLE;
-//}
-
-
     //338.比特位计数
     public int[] countBits(int num) {
         int[] res = new int[num + 1];
